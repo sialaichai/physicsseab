@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const years = [...new Set(allData.map(item => item.year).filter(Boolean))].sort((a, b) => b - a); 
         const papers = [...new Set(allData.map(item => item.paper).filter(Boolean))].sort();
-        const jcs = [...new Set(allData.map(item => item.pcode).filter(Boolean))].sort();
+        const jcs = [...new Set(allData.map(item => item.jc).filter(Boolean))].sort();
         const questions = [...new Set(allData.map(item => item.question).filter(Boolean))].sort(naturalSort);
 
         const addCheckboxes = (listElement, values, className) => {
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Years
         if (selectedYears.size > 0) filteredData = filteredData.filter(item => selectedYears.has(item.year));
         // 3. JCs
-        if (selectedJCs.size > 0) filteredData = filteredData.filter(item => selectedJCs.has(item.pcode));
+        if (selectedJCs.size > 0) filteredData = filteredData.filter(item => selectedJCs.has(item.jc));
         // 4. Papers
         if (selectedPapers.size > 0) filteredData = filteredData.filter(item => selectedPapers.has(item.paper));
         // 5. Questions (NEW)
