@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!userConfirmed) return; 
         }
 
-        const pdfBaseUrl = "https://sialaichai.github.io/physicsprelim/pdfs/";
+        const pdfBaseUrl = "https://sialaichai.github.io/physicsseab/pdfs/";
         let htmlContent = `
             <!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Filtered PDF Report</title>
             <style>
