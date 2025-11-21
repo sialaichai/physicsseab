@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ======================================================
     // 1. PASSWORD PROTECTION
     // ======================================================
-    const correctHash = ""; // Password: 12345
+    const correctHash = "2112653932"; // Password: 12345
 
     function simpleHash(str) {
         let hash = 0;
