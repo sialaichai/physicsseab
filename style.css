@@ -180,13 +180,16 @@ tbody tr:hover {
     min-width: 80px; /* Half width */
 }
 
-#year-filter-btn,
+#year-filter-btn {
+    min-width: 90px; /* Half width */
+}
+
 #paper-filter-btn {
     min-width: 120px; /* Half width */
 }
 
 #topic-filter-btn {
-    min-width: 120px; /* Double width */
+    min-width: 180px; /* Double width */
 }
 
 /* --- File Count Display --- */
