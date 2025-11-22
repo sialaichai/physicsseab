@@ -201,7 +201,7 @@ tbody tr:hover {
 }
 
 #topic-filter-btn {
-    min-width: 280px; /* Double width */
+    min-width: 300px; /* Double width */
 }
 
 /* --- File Count Display --- */
