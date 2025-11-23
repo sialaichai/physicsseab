@@ -6,59 +6,93 @@
     <title>9702 Physics Viewer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
-        body { font-family: sans-serif; margin: 0; overflow: hidden; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; overflow: hidden; }
         
-        /* LOGIN OVERLAY */
+        /* =========================================
+           LOGIN SCREEN STYLES (CENTERED)
+           ========================================= */
         #login-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #f4f4f4; z-index: 10000; display: flex;
-            justify-content: center; alignItems: center; flex-direction: column;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh;
+            background-color: #e0e0e0; /* Light Grey Background */
+            z-index: 10000; 
+            display: flex;
+            justify-content: center; /* Center Horizontally */
+            align-items: center;     /* Center Vertically */
         }
+
         .login-box {
-            background: white; padding: 40px; border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center;
-            width: 400px;
+            background: white; 
+            padding: 40px; 
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* Nice soft shadow */
+            text-align: center;
+            width: 90%;
+            max-width: 400px; /* Max width for desktop */
         }
+
+        .login-box h2 { margin-top: 0; color: #333; }
+        .login-box p { color: #666; margin-bottom: 20px; }
+
         .login-box input {
-            width: 100%; padding: 10px; margin: 15px 0;
-            border: 1px solid #ddd; border-radius: 4px; font-size: 16px; box-sizing: border-box;
+            width: 100%; padding: 12px; margin: 10px 0;
+            border: 1px solid #ccc; border-radius: 6px; font-size: 16px; box-sizing: border-box;
+            outline: none; transition: border 0.3s;
         }
+        .login-box input:focus { border-color: #007bff; }
+
         .login-box button {
-            width: 100%; padding: 10px; background: #007bff; color: white;
-            border: none; border-radius: 4px; font-size: 16px; cursor: pointer;
+            width: 100%; padding: 12px; background: #007bff; color: white;
+            border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer;
+            transition: background 0.3s;
         }
         .login-box button:hover { background: #0056b3; }
         
+        /* Status Messages */
         .error { 
-            color: red; margin-top: 10px; display: none; 
-            background: #fff0f0; border: 1px solid red; padding: 10px;
-            font-family: monospace; font-size: 12px; white-space: pre-wrap; text-align: left;
+            color: #d9534f; margin-top: 15px; display: none; 
+            background: #f9d6d5; border: 1px solid #d9534f; padding: 10px;
+            font-size: 13px; border-radius: 4px; text-align: left;
         }
-        .status { color: blue; margin-top: 10px; font-size: 14px; }
+        .status { 
+            color: #0275d8; margin-top: 15px; font-size: 14px; font-weight: 500;
+            display: block;
+        }
 
-        /* MAIN APP */
+        /* =========================================
+           MAIN APP STYLES
+           ========================================= */
         #main-container { display: none; flex-direction: column; height: 100vh; }
         #upper-panel { flex: 1; display: flex; flex-direction: column; min-height: 150px; }
         #lower-panel { height: 300px; min-height: 100px; overflow-y: auto; background: white; }
         #dragger { height: 5px; background: #ccc; cursor: ns-resize; border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; }
-        #controls { padding: 10px; background: #f4f4f4; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        #pdf-viewer-container { flex: 1; }
+        #controls { padding: 10px; background: #f4f4f4; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; border-bottom: 1px solid #ddd; }
+        #pdf-viewer-container { flex: 1; background: #525659; } /* Dark background for PDF area */
         #pdf-viewer { width: 100%; height: 100%; border: none; }
         
-        table { width: 100%; border-collapse: collapse; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; cursor: pointer; }
-        tbody tr:hover { background-color: #f9f9f9; cursor: pointer; }
+        th { background-color: #f8f9fa; cursor: pointer; position: sticky; top: 0; }
+        tbody tr:hover { background-color: #e2e6ea; cursor: pointer; }
         
         .dropdown-check-container { position: relative; display: inline-block; }
-        .filter-button { padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; background: white; min-width: 120px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;}
-        .dropdown-panel { display: none; position: absolute; background: white; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 100; min-width: 150px; padding: 10px; }
-        .dropdown-list { max-height: 200px; overflow-y: auto; border-bottom: 1px solid #eee; margin-bottom: 10px; }
-        .dropdown-list label { display: block; padding: 5px; cursor: pointer; }
+        .filter-button { padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; background: white; min-width: 120px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;}
+        .dropdown-panel { display: none; position: absolute; background: white; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 100; min-width: 200px; padding: 10px; border-radius: 4px; }
+        .dropdown-list { max-height: 250px; overflow-y: auto; border-bottom: 1px solid #eee; margin-bottom: 10px; }
+        .dropdown-list label { display: block; padding: 6px; cursor: pointer; }
         .dropdown-list label:hover { background-color: #f4f4f4; }
         .apply-button { width: 100%; padding: 8px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;}
-        .nav-link { text-decoration: none; color: #333; background-color: #e0e0e0; padding: 8px 12px; border-radius: 4px; font-weight: bold; border: 1px solid #ccc; }
-        #generate-html-btn { background-color: #007bff; color: white; padding: 8px 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        
+        .nav-link { text-decoration: none; color: #333; background-color: #e0e0e0; padding: 8px 12px; border-radius: 4px; font-weight: bold; border: 1px solid #ccc; font-size: 14px; }
+        .nav-link:hover { background-color: #d0d0d0; }
+        
+        #generate-html-btn { background-color: #28a745; color: white; padding: 8px 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 14px; }
+        #generate-html-btn:hover { background-color: #218838; }
+        
+        #file-count-display { font-weight: bold; color: #555; margin-left: 10px; }
     </style>
 </head>
 <body>
@@ -66,10 +100,11 @@
     <div id="login-screen">
         <div class="login-box">
             <h2>Restricted Access</h2>
-            <p>Please enter the password to load the data.</p>
+            <p>Enter password to unlock data</p>
             <input type="password" id="pass-input" placeholder="Password" onkeypress="handleEnter(event)">
-            <button onclick="unlock()">Unlock</button>
-            <div id="status-msg" class="status">Initializing...</div>
+            <button onclick="unlock()">Login</button>
+            
+            <div id="status-msg" class="status">Initializing System...</div>
             <div id="error-msg" class="error"></div>
         </div>
     </div>
@@ -82,8 +117,9 @@
                 <div class="dropdown-check-container"><button id="question-filter-btn" class="filter-button">Question (<span id="question-filter-count">0</span>)</button><div id="question-filter-panel" class="dropdown-panel"><div id="question-filter-list" class="dropdown-list"></div><button id="question-filter-apply" class="apply-button">Apply</button></div></div>
                 <div class="dropdown-check-container"><button id="topic-filter-btn" class="filter-button">Topic (<span id="topic-filter-count">0</span>)</button><div id="topic-filter-panel" class="dropdown-panel"><div id="topic-filter-list" class="dropdown-list"></div><button id="topic-filter-apply" class="apply-button">Apply</button></div></div>
                 
-                <button id="generate-html-btn">Create Filtered HTML File</button>
+                <button id="generate-html-btn">Create Report</button>
                 <span id="file-count-display"></span>
+                
                 <a href="https://sialaichai.github.io/physicsprelim/" class="nav-link" style="margin-left:auto;">Prelim</a>
                 <a href="https://sialaichai.github.io/physicsseab/" class="nav-link">SEAB</a>
             </div>
@@ -99,7 +135,7 @@
     </div> 
 
     <script>
-    // CONFIG
+    // CONFIGURATION
     const PAYLOAD_FILE = 'payload.enc';
     let PDF_FOLDER = ''; 
     let ENCRYPTED_TEXT = '';
@@ -121,7 +157,7 @@
     }
 
     // 1. PRELOAD THE ENCRYPTED DATA
-    logStatus("Fetching payload.enc from GitHub...");
+    logStatus("Loading secure data...");
     
     fetch(PAYLOAD_FILE)
         .then(res => {
@@ -131,10 +167,10 @@
         .then(text => { 
             if (!text || text.length === 0) throw new Error("payload.enc is EMPTY (0 bytes).");
             ENCRYPTED_TEXT = text.trim();
-            logStatus(`Ready. Encrypted Payload Size: ${(text.length/1024).toFixed(2)} KB`);
+            logStatus(`Ready. Enter Password.`);
         })
         .catch(err => {
-            logError("FATAL ERROR: Could not load data file.\n" + err.message);
+            logError("Error: Could not find 'payload.enc'.\nDid you upload it to GitHub?");
         });
 
     function handleEnter(e) { if(e.key === 'Enter') unlock(); }
@@ -145,50 +181,57 @@
         if (!pass) { logError("Please enter a password."); return; }
         
         if (!ENCRYPTED_TEXT) {
-            logError("Data file hasn't loaded yet. Check your internet connection.");
+            logError("Data not loaded. Check internet connection.");
             return;
         }
 
         logStatus("Decrypting...");
 
+        // Small delay to allow UI update
         setTimeout(() => {
             try {
                 // DECRYPT
                 const bytes = CryptoJS.AES.decrypt(ENCRYPTED_TEXT, pass);
-                if (bytes.sigBytes < 0) throw new Error("Decryption Key Mismatch.");
                 
+                // Validate Key
+                if (bytes.sigBytes < 0) throw new Error("Decryption Failed (Key Error).");
+                
+                // Convert to String
                 let decryptedStr = "";
                 try {
                     decryptedStr = bytes.toString(CryptoJS.enc.Utf8);
                 } catch(e) {
-                    throw new Error("Wrong password (UTF-8 error).");
+                    throw new Error("Incorrect Password.");
                 }
 
-                if (!decryptedStr) throw new Error("Wrong password (Empty result).");
+                if (!decryptedStr) throw new Error("Incorrect Password.");
 
+                // Parse JSON
                 let bundle;
                 try {
                     bundle = JSON.parse(decryptedStr);
                 } catch(e) {
-                    throw new Error("Decryption succeeded but JSON is broken.\n" + e.message);
+                    throw new Error("Decryption succeeded but data is broken.");
                 }
                 
                 // SUCCESS
                 PDF_FOLDER = bundle.secure_folder;
                 startApp(bundle.data);
                 
+                // Hide Login, Show App
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-container').style.display = 'flex';
 
             } catch (e) {
-                logError("LOGIN FAILED:\n" + e.message);
+                logError(e.message);
             }
         }, 100);
     }
 
     // 3. MAIN APP LOGIC
     function startApp(allData) {
-        // --- 1. INITIALIZE VARIABLES FIRST (THE FIX) ---
+        
+        // --- 1. INITIALIZE VARIABLES (Fixed Location) ---
         let selectedTopics = new Set();
         let selectedYears = new Set();
         let selectedPapers = new Set();
@@ -323,5 +366,4 @@
     }
     </script>
 </body>
-
 </html>
