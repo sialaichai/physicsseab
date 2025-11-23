@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9702 Physics Viewer (Debug)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 0; overflow: hidden; }
+        
+        /* LOGIN OVERLAY */
+        #login-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #f4f4f4; z-index: 10000; display: flex;
+            justify-content: center; alignItems: center; flex-direction: column;
+        }
+        .login-box {
+            background: white; padding: 40px; border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center;
+            width: 400px;
+        }
+        .login-box input {
+            width: 100%; padding: 10px; margin: 15px 0;
+            border: 1px solid #ddd; border-radius: 4px; font-size: 16px; box-sizing: border-box;
+        }
+        .login-box button {
+            width: 100%; padding: 10px; background: #007bff; color: white;
+            border: none; border-radius: 4px; font-size: 16px; cursor: pointer;
+        }
+        .login-box button:hover { background: #0056b3; }
+        
+        /* DEBUG STYLES */
+        .error { 
+            color: red; margin-top: 10px; display: block; 
+            background: #fff0f0; border: 1px solid red; padding: 10px;
+            font-family: monospace; font-size: 12px; white-space: pre-wrap; text-align: left;
+        }
+        .status { color: blue; margin-top: 10px; font-size: 14px; }
+
+        /* MAIN APP */
+        #main-container { display: none; flex-direction: column; height: 100vh; }
+        #upper-panel { flex: 1; display: flex; flex-direction: column; min-height: 150px; }
+        #lower-panel { height: 300px; min-height: 100px; overflow-y: auto; background: white; }
+        #dragger { height: 5px; background: #ccc; cursor: ns-resize; border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; }
+        #controls { padding: 10px; background: #f4f4f4; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        #pdf-viewer-container { flex: 1; }
+        #pdf-viewer { width: 100%; height: 100%; border: none; }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; cursor: pointer; }
+        tbody tr:hover { background-color: #f9f9f9; cursor: pointer; }
+        
+        .dropdown-check-container { position: relative; display: inline-block; }
+        .filter-button { padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; background: white; min-width: 120px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;}
+        .dropdown-panel { display: none; position: absolute; background: white; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 100; min-width: 150px; padding: 10px; }
+        .dropdown-list { max-height: 200px; overflow-y: auto; border-bottom: 1px solid #eee; margin-bottom: 10px; }
+        .dropdown-list label { display: block; padding: 5px; cursor: pointer; }
+        .dropdown-list label:hover { background-color: #f4f4f4; }
+        .apply-button { width: 100%; padding: 8px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;}
+        .nav-link { text-decoration: none; color: #333; background-color: #e0e0e0; padding: 8px 12px; border-radius: 4px; font-weight: bold; border: 1px solid #ccc; }
+        #generate-html-btn { background-color: #007bff; color: white; padding: 8px 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>Restricted Access</h2>
+            <p>Please enter the password to load the data.</p>
+            <input type="password" id="pass-input" placeholder="Password" onkeypress="handleEnter(event)">
+            <button onclick="unlock()">Unlock</button>
+            <div id="status-msg" class="status">Initializing...</div>
+            <div id="error-msg" class="error" style="display:none;"></div>
+        </div>
+    </div>
+
+    <div id="main-container">
+        <div id="upper-panel">
+            <div id="controls">
+                <div class="dropdown-check-container"><button id="year-filter-btn" class="filter-button">Year (<span id="year-filter-count">0</span>)</button><div id="year-filter-panel" class="dropdown-panel"><div id="year-filter-list" class="dropdown-list"></div><button id="year-filter-apply" class="apply-button">Apply</button></div></div>
+                <div class="dropdown-check-container"><button id="paper-filter-btn" class="filter-button">Paper (<span id="paper-filter-count">0</span>)</button><div id="paper-filter-panel" class="dropdown-panel"><div id="paper-filter-list" class="dropdown-list"></div><button id="paper-filter-apply" class="apply-button">Apply</button></div></div>
+                <div class="dropdown-check-container"><button id="question-filter-btn" class="filter-button">Question (<span id="question-filter-count">0</span>)</button><div id="question-filter-panel" class="dropdown-panel"><div id="question-filter-list" class="dropdown-list"></div><button id="question-filter-apply" class="apply-button">Apply</button></div></div>
+                <div class="dropdown-check-container"><button id="topic-filter-btn" class="filter-button">Topic (<span id="topic-filter-count">0</span>)</button><div id="topic-filter-panel" class="dropdown-panel"><div id="topic-filter-list" class="dropdown-list"></div><button id="topic-filter-apply" class="apply-button">Apply</button></div></div>
+                
+                <button id="generate-html-btn">Create Filtered HTML File</button>
+                <span id="file-count-display"></span>
+                <a href="https://sialaichai.github.io/physicsprelim/" class="nav-link" style="margin-left:auto;">Prelim</a>
+                <a href="https://sialaichai.github.io/physicsseab/" class="nav-link">SEAB</a>
+            </div>
+            <div id="pdf-viewer-container"><iframe id="pdf-viewer" src="" frameborder="0"></iframe></div>
+        </div>
+        <div id="dragger"></div>
+        <div id="lower-panel">
+            <table id="data-table">
+                <thead><tr><th>Filename</th><th>Year</th><th>Paper</th><th>Question</th><th>Main Topic</th><th>Other Topics</th></tr></thead>
+                <tbody id="data-table-body"></tbody>
+            </table>
+        </div>
+    </div> 
+
+    <script>
+    // CONFIG
+    const PAYLOAD_FILE = 'payload.enc';
+    let PDF_FOLDER = ''; 
+    let ENCRYPTED_TEXT = '';
+
+    const statusEl = document.getElementById('status-msg');
+    const errorEl = document.getElementById('error-msg');
+
+    function logError(msg) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = msg;
+        statusEl.style.display = 'none';
+        console.error(msg);
+    }
+
+    function logStatus(msg) {
+        statusEl.textContent = msg;
+        statusEl.style.display = 'block';
+        errorEl.style.display = 'none';
+    }
+
+    // 1. PRELOAD THE ENCRYPTED DATA
+    logStatus("Fetching payload.enc from GitHub...");
+    
+    fetch(PAYLOAD_FILE)
+        .then(res => {
+            if(!res.ok) throw new Error(`Fetch Failed: ${res.status} ${res.statusText}`);
+            return res.text();
+        })
+        .then(text => { 
+            if (!text || text.length === 0) throw new Error("payload.enc is EMPTY (0 bytes).");
+            ENCRYPTED_TEXT = text.trim(); // TRIM removes dangerous whitespaces!
+            logStatus(`Ready. Encrypted Payload Size: ${(text.length/1024).toFixed(2)} KB`);
+        })
+        .catch(err => {
+            logError("FATAL ERROR: Could not load data file.\n" + err.message + "\n\nMake sure 'payload.enc' is in the same folder as index.html.");
+        });
+
+    function handleEnter(e) { if(e.key === 'Enter') unlock(); }
+
+    // 2. UNLOCK FUNCTION
+    function unlock() {
+        const pass = document.getElementById('pass-input').value;
+        if (!pass) { logError("Please enter a password."); return; }
+        
+        if (!ENCRYPTED_TEXT) {
+            logError("Data file hasn't loaded yet. Check your internet connection or GitHub file.");
+            return;
+        }
+
+        logStatus("Decrypting...");
+
+        // Allow UI to update before freezing for decryption
+        setTimeout(() => {
+            try {
+                // ATTEMPT DECRYPTION
+                const bytes = CryptoJS.AES.decrypt(ENCRYPTED_TEXT, pass);
+                
+                // CHECK: Did we get valid bytes?
+                if (bytes.sigBytes < 0) throw new Error("Decryption Key/Salt Mismatch.");
+                
+                // ATTEMPT TO STRINGIFY
+                let decryptedStr = "";
+                try {
+                    decryptedStr = bytes.toString(CryptoJS.enc.Utf8);
+                } catch(e) {
+                    throw new Error("Decryption failed. (Malformed UTF-8). Wrong password?");
+                }
+
+                if (!decryptedStr) throw new Error("Decrypted result is empty. Wrong password?");
+
+                // ATTEMPT PARSE
+                let bundle;
+                try {
+                    bundle = JSON.parse(decryptedStr);
+                } catch(e) {
+                    throw new Error("Decryption succeeded, but JSON is broken.\n" + e.message);
+                }
+                
+                // SUCCESS
+                PDF_FOLDER = bundle.secure_folder;
+                startApp(bundle.data);
+                
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-container').style.display = 'flex';
+
+            } catch (e) {
+                logError("LOGIN FAILED:\n" + e.message);
+            }
+        }, 100);
+    }
+
+    // 3. MAIN APP LOGIC
+    function startApp(allData) {
+        const tableBody = document.getElementById('data-table-body');
+        const pdfViewer = document.getElementById('pdf-viewer');
+        const fileCountDisplay = document.getElementById('file-count-display');
+        
+        // Normalize Data
+        allData = allData.map(item => {
+            let q = (item.question || '').trim();
+            q = q.replace(/\.pdf$/i, '').replace(/^q0+(\d)/i, 'q$1');
+            return {
+                filename: (item.filename || '').trim(),
+                year: (item.year || '').trim(),
+                paper: (item.paper || '').trim(),
+                question: q, 
+                mainTopic: (item.mainTopic || '').trim(),
+                otherTopics: Array.isArray(item.otherTopics) ? item.otherTopics.map(t => t.trim()).filter(t => t !== "") : []
+            };
+        });
+
+        // Initial Render
+        populateDropdowns(allData);
+        setupEventListeners(allData);
+        renderTable(allData);
+
+        // --- Helper Functions ---
+        function populateDropdowns(data) {
+            const getUniques = (mapper, sorter) => [...new Set(data.map(mapper).flat().filter(Boolean))].sort(sorter);
+            
+            const naturalSort = (a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+            const yearSort = (a, b) => {
+                const numA = parseInt(a.replace(/\D/g, '')) || 0;
+                const numB = parseInt(b.replace(/\D/g, '')) || 0;
+                return numA !== numB ? numB - numA : b.localeCompare(a);
+            };
+
+            const topics = getUniques(i => i.mainTopic.split(/[;,]/).map(s=>s.trim()), undefined);
+            const years = getUniques(i => i.year, yearSort);
+            const papers = getUniques(i => i.paper, undefined);
+            const questions = getUniques(i => i.question, naturalSort);
+
+            const setupList = (id, arr, cls) => {
+                const el = document.getElementById(id);
+                if(!el) return; el.innerHTML = '';
+                arr.forEach(v => {
+                    const l = document.createElement('label');
+                    const c = document.createElement('input'); c.type='checkbox'; c.className=cls; c.value=v;
+                    l.appendChild(c); l.appendChild(document.createTextNode(' '+v)); el.appendChild(l);
+                });
+            }
+            setupList('topic-filter-list', topics, 'topic-checkbox');
+            setupList('year-filter-list', years, 'year-checkbox');
+            setupList('paper-filter-list', papers, 'paper-checkbox');
+            setupList('question-filter-list', questions, 'question-checkbox');
+        }
+
+        // Filter State
+        let selectedTopics = new Set();
+        let selectedYears = new Set();
+        let selectedPapers = new Set();
+        let selectedQuestions = new Set();
+
+        function setupEventListeners(data) {
+            const setup = (btnId, panelId, listId, applyId, set, cls) => {
+                const btn = document.getElementById(btnId), panel = document.getElementById(panelId);
+                const list = document.getElementById(listId), apply = document.getElementById(applyId);
+                if(!btn) return;
+                btn.addEventListener('click', () => panel.style.display = panel.style.display === 'block' ? 'none' : 'block');
+                apply.addEventListener('click', () => {
+                    set.clear(); list.querySelectorAll(`.${cls}:checked`).forEach(b => set.add(b.value));
+                    btn.children[0].textContent = set.size; panel.style.display = 'none'; applyFilters(data);
+                });
+            };
+            setup('topic-filter-btn', 'topic-filter-panel', 'topic-filter-list', 'topic-filter-apply', selectedTopics, 'topic-checkbox');
+            setup('year-filter-btn', 'year-filter-panel', 'year-filter-list', 'year-filter-apply', selectedYears, 'year-checkbox');
+            setup('paper-filter-btn', 'paper-filter-panel', 'paper-filter-list', 'paper-filter-apply', selectedPapers, 'paper-checkbox');
+            setup('question-filter-btn', 'question-filter-panel', 'question-filter-list', 'question-filter-apply', selectedQuestions, 'question-checkbox');
+
+            document.addEventListener('click', (e) => {
+                ['topic-filter-panel', 'year-filter-panel', 'paper-filter-panel', 'question-filter-panel'].forEach(id => {
+                    const p = document.getElementById(id);
+                    if(p && !p.contains(e.target) && !e.target.closest('.filter-button')) p.style.display='none';
+                });
+            });
+
+            // Generate Button
+            const genBtn = document.getElementById('generate-html-btn');
+            genBtn.addEventListener('click', () => {
+                const rows = tableBody.querySelectorAll('tr');
+                if(rows.length > 100 && !confirm(`Generate report for ${rows.length} files?`)) return;
+                const pdfBaseUrl = `https://sialaichai.github.io/physics9702/${PDF_FOLDER}/`;
+                let html = `<!DOCTYPE html><html><head><title>Report</title><style>body{font-family:sans-serif;margin:20px}embed{width:100%;height:800px;border:1px solid #ccc;margin-bottom:40px}</style></head><body><h1>PDF Report</h1>`;
+                rows.forEach(r => {
+                    html += `<div><h3>${r.cells[0].textContent}</h3><embed src='${pdfBaseUrl}${r.cells[1].textContent}/${r.cells[0].textContent}' type='application/pdf' /></div>`;
+                });
+                html += `</body></html>`;
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(new Blob([html], {type:'text/html'}));
+                a.download = 'report.html'; a.click();
+            });
+        }
+
+        function applyFilters(data) {
+            let fd = data;
+            if(selectedTopics.size > 0) fd = fd.filter(i => i.mainTopic.split(/[;,]/).map(s=>s.trim()).some(t => selectedTopics.has(t)));
+            if(selectedYears.size > 0) fd = fd.filter(i => selectedYears.has(i.year));
+            if(selectedPapers.size > 0) fd = fd.filter(i => selectedPapers.has(i.paper));
+            if(selectedQuestions.size > 0) fd = fd.filter(i => selectedQuestions.has(i.question));
+            renderTable(fd);
+        }
+
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            const fragment = document.createDocumentFragment();
+            const displayData = data.length > 500 ? data.slice(0, 500) : data;
+            displayData.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r.filename}</td><td>${r.year}</td><td>${r.paper}</td><td>${r.question}</td><td>${r.mainTopic}</td><td>${r.otherTopics.join(', ')}</td>`;
+                tr.addEventListener('click', () => pdfViewer.src = `${PDF_FOLDER}/${r.year}/${r.filename}`);
+                fragment.appendChild(tr);
+            });
+            tableBody.appendChild(fragment);
+            fileCountDisplay.textContent = data.length > 500 ? `Showing first 500 of ${data.length} files` : `${data.length} files found`;
+        }
+
+        // Dragger
+        const dragger = document.getElementById('dragger');
+        const lowerPanel = document.getElementById('lower-panel');
+        if(dragger && lowerPanel) {
+            let isD = false;
+            dragger.addEventListener('mousedown', () => { isD = true; document.body.style.userSelect = 'none'; if(pdfViewer) pdfViewer.style.pointerEvents = 'none'; });
+            document.addEventListener('mouseup', () => { isD = false; document.body.style.userSelect = 'auto'; if(pdfViewer) pdfViewer.style.pointerEvents = 'auto'; });
+            document.addEventListener('mousemove', (e) => { if(isD) lowerPanel.style.height = `${window.innerHeight - e.clientY - 2.5}px`; });
+        }
+    }
+    </script>
+</body>
+</html>
