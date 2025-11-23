@@ -197,7 +197,7 @@ tbody tr:hover {
 }
 
 #paper-filter-btn {
-    min-width: 120px; /* Half width */
+    min-width: 105px; /* Half width */
 }
 
 #topic-filter-btn {
