@@ -66,7 +66,28 @@ document.addEventListener('DOMContentLoaded', () => {
         errorMsg.style.color = 'red';
         errorMsg.style.display = 'none';
         errorMsg.innerText = "Incorrect Password";
-
+        
+            /* =========================================
+           START OF NEW CODE: Cache Warning Message
+           ========================================= */
+        const cacheMsg = document.createElement('p');
+        cacheMsg.innerHTML = "⚠️ <b>Display weird?</b><br>If the page looks scattered, please Clear Cache:<br><b>Win:</b> Ctrl + F5 &nbsp;|&nbsp; <b>Mac:</b> Cmd + Shift + R";
+        
+        // Style the message to look like a helpful tip
+        cacheMsg.style.marginTop = "15px";
+        cacheMsg.style.fontSize = "12px";
+        cacheMsg.style.color = "#666"; // Dark gray text
+        cacheMsg.style.textAlign = "center";
+        cacheMsg.style.lineHeight = "1.4";
+        cacheMsg.style.borderTop = "1px solid #ccc"; // A subtle separator line
+        cacheMsg.style.paddingTop = "10px";
+    
+        // Add the message to the box
+        box.appendChild(cacheMsg);
+        /* =========================================
+           END OF NEW CODE
+           ========================================= */
+        
         box.appendChild(title);
         box.appendChild(input);
         box.appendChild(document.createElement('br'));
@@ -99,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. MAIN APPLICATION LOGIC
     // ======================================================
 
+    
     const tableBody = document.getElementById('data-table-body');
     const pdfViewer = document.getElementById('pdf-viewer');
     const generateBtn = document.getElementById('generate-html-btn');
