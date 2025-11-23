@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>9702 Physics Viewer (Debug)</title>
+    <title>9702 Physics Viewer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         body { font-family: sans-serif; margin: 0; overflow: hidden; }
@@ -29,9 +29,8 @@
         }
         .login-box button:hover { background: #0056b3; }
         
-        /* DEBUG STYLES */
         .error { 
-            color: red; margin-top: 10px; display: block; 
+            color: red; margin-top: 10px; display: none; 
             background: #fff0f0; border: 1px solid red; padding: 10px;
             font-family: monospace; font-size: 12px; white-space: pre-wrap; text-align: left;
         }
@@ -71,7 +70,7 @@
             <input type="password" id="pass-input" placeholder="Password" onkeypress="handleEnter(event)">
             <button onclick="unlock()">Unlock</button>
             <div id="status-msg" class="status">Initializing...</div>
-            <div id="error-msg" class="error" style="display:none;"></div>
+            <div id="error-msg" class="error"></div>
         </div>
     </div>
 
@@ -131,11 +130,11 @@
         })
         .then(text => { 
             if (!text || text.length === 0) throw new Error("payload.enc is EMPTY (0 bytes).");
-            ENCRYPTED_TEXT = text.trim(); // TRIM removes dangerous whitespaces!
+            ENCRYPTED_TEXT = text.trim();
             logStatus(`Ready. Encrypted Payload Size: ${(text.length/1024).toFixed(2)} KB`);
         })
         .catch(err => {
-            logError("FATAL ERROR: Could not load data file.\n" + err.message + "\n\nMake sure 'payload.enc' is in the same folder as index.html.");
+            logError("FATAL ERROR: Could not load data file.\n" + err.message);
         });
 
     function handleEnter(e) { if(e.key === 'Enter') unlock(); }
@@ -146,37 +145,32 @@
         if (!pass) { logError("Please enter a password."); return; }
         
         if (!ENCRYPTED_TEXT) {
-            logError("Data file hasn't loaded yet. Check your internet connection or GitHub file.");
+            logError("Data file hasn't loaded yet. Check your internet connection.");
             return;
         }
 
         logStatus("Decrypting...");
 
-        // Allow UI to update before freezing for decryption
         setTimeout(() => {
             try {
-                // ATTEMPT DECRYPTION
+                // DECRYPT
                 const bytes = CryptoJS.AES.decrypt(ENCRYPTED_TEXT, pass);
+                if (bytes.sigBytes < 0) throw new Error("Decryption Key Mismatch.");
                 
-                // CHECK: Did we get valid bytes?
-                if (bytes.sigBytes < 0) throw new Error("Decryption Key/Salt Mismatch.");
-                
-                // ATTEMPT TO STRINGIFY
                 let decryptedStr = "";
                 try {
                     decryptedStr = bytes.toString(CryptoJS.enc.Utf8);
                 } catch(e) {
-                    throw new Error("Decryption failed. (Malformed UTF-8). Wrong password?");
+                    throw new Error("Wrong password (UTF-8 error).");
                 }
 
-                if (!decryptedStr) throw new Error("Decrypted result is empty. Wrong password?");
+                if (!decryptedStr) throw new Error("Wrong password (Empty result).");
 
-                // ATTEMPT PARSE
                 let bundle;
                 try {
                     bundle = JSON.parse(decryptedStr);
                 } catch(e) {
-                    throw new Error("Decryption succeeded, but JSON is broken.\n" + e.message);
+                    throw new Error("Decryption succeeded but JSON is broken.\n" + e.message);
                 }
                 
                 // SUCCESS
@@ -194,6 +188,12 @@
 
     // 3. MAIN APP LOGIC
     function startApp(allData) {
+        // --- 1. INITIALIZE VARIABLES FIRST (THE FIX) ---
+        let selectedTopics = new Set();
+        let selectedYears = new Set();
+        let selectedPapers = new Set();
+        let selectedQuestions = new Set();
+        
         const tableBody = document.getElementById('data-table-body');
         const pdfViewer = document.getElementById('pdf-viewer');
         const fileCountDisplay = document.getElementById('file-count-display');
@@ -247,12 +247,6 @@
             setupList('paper-filter-list', papers, 'paper-checkbox');
             setupList('question-filter-list', questions, 'question-checkbox');
         }
-
-        // Filter State
-        let selectedTopics = new Set();
-        let selectedYears = new Set();
-        let selectedPapers = new Set();
-        let selectedQuestions = new Set();
 
         function setupEventListeners(data) {
             const setup = (btnId, panelId, listId, applyId, set, cls) => {
