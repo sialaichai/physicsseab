@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedQuestions = new Set(); // NEW
 
     // --- 1. Fetch JSON ---
-    fetch('SEABPhy.json')
+    fetch('SEABPhy.json?t=' + new Date().getTime())
         .then(response => {
             if (!response.ok) throw new Error(`Failed to fetch SEAB.json - Status: ${response.status}`);
             return response.json();
