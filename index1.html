@@ -34,7 +34,6 @@
         }
         .login-box button:hover { background: #0056b3; }
         
-        /* Status Messages */
         .error { 
             color: #d9534f; margin-top: 15px; display: none; 
             background: #f9d6d5; border: 1px solid #d9534f; padding: 10px;
@@ -98,8 +97,8 @@
                 <button id="generate-html-btn">Create Report</button>
                 <span id="file-count-display"></span>
                 
-                <a href="https://sialaichai.github.io/physics9702/" class="nav-link" style="margin-left:auto;">9702</a>
-                <a href="https://sialaichai.github.io/physicsprelim/" class="nav-link">Prelim</a>
+                <a href="https://sialaichai.github.io/physicsprelim/" class="nav-link" style="margin-left:auto;">Prelim</a>
+                <a href="https://sialaichai.github.io/physicsseab/" class="nav-link">SEAB</a>
             </div>
             <div id="pdf-viewer-container"><iframe id="pdf-viewer" src="" frameborder="0"></iframe></div>
         </div>
@@ -115,6 +114,8 @@
     <script>
     // CONFIGURATION
     const PAYLOAD_FILE = 'payload.enc';
+    const UPDATES_FILE = 'updates.json'; // Plaintext updates file
+    
     let PDF_FOLDER = ''; 
     let ENCRYPTED_TEXT = '';
 
@@ -152,7 +153,7 @@
             if(savedPass) {
                 logStatus("Restoring Session...");
                 document.getElementById('pass-input').value = savedPass;
-                unlock(true); // 'true' means automatic login
+                unlock(true); 
             }
         })
         .catch(err => {
@@ -161,53 +162,61 @@
 
     function handleEnter(e) { if(e.key === 'Enter') unlock(); }
 
-    // 2. UNLOCK FUNCTION
+    // 2. UNLOCK FUNCTION (UPDATED FOR HYBRID LOADING)
     function unlock(isAuto = false) {
         const passInput = document.getElementById('pass-input');
         const pass = passInput.value;
         
-        if (!pass) { 
-            if(!isAuto) logError("Please enter a password."); 
-            return; 
-        }
-        
-        if (!ENCRYPTED_TEXT) {
-            logError("Data not loaded. Check internet connection.");
-            return;
-        }
+        if (!pass) { if(!isAuto) logError("Please enter a password."); return; }
+        if (!ENCRYPTED_TEXT) { logError("Data not loaded."); return; }
 
         if(!isAuto) logStatus("Decrypting...");
 
-        // Small delay to allow UI update
         setTimeout(() => {
             try {
-                // DECRYPT
+                // A. Decrypt Main Payload
                 const bytes = CryptoJS.AES.decrypt(ENCRYPTED_TEXT, pass);
                 if (bytes.sigBytes < 0) throw new Error("Decryption Key Mismatch.");
                 
-                let decryptedStr = "";
-                try {
-                    decryptedStr = bytes.toString(CryptoJS.enc.Utf8);
-                } catch(e) { throw new Error("Incorrect Password."); }
-
+                let decryptedStr = bytes.toString(CryptoJS.enc.Utf8);
                 if (!decryptedStr) throw new Error("Incorrect Password.");
 
-                let bundle;
-                try {
-                    bundle = JSON.parse(decryptedStr);
-                } catch(e) { throw new Error("Decryption succeeded but data is broken."); }
+                let bundle = JSON.parse(decryptedStr);
                 
-                // SUCCESS - SAVE SESSION
+                // B. Save Session
                 sessionStorage.setItem('physics_session_key', pass);
-
                 PDF_FOLDER = bundle.secure_folder;
-                startApp(bundle.data);
+                let mainData = bundle.data;
+
+                // C. Fetch Updates (The New Hybrid Step)
+                logStatus("Checking for updates...");
                 
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('main-container').style.display = 'flex';
+                fetch(UPDATES_FILE)
+                    .then(res => {
+                        if (res.status === 404) return []; // No updates yet, that's fine
+                        if (!res.ok) throw new Error("Update check failed");
+                        return res.json();
+                    })
+                    .then(updateData => {
+                        // Merge Old + New
+                        if(Array.isArray(updateData) && updateData.length > 0) {
+                            console.log(`Merging ${updateData.length} new items.`);
+                            mainData = mainData.concat(updateData);
+                        }
+                        // Launch App
+                        startApp(mainData);
+                        document.getElementById('login-screen').style.display = 'none';
+                        document.getElementById('main-container').style.display = 'flex';
+                    })
+                    .catch(err => {
+                        console.warn("Update fetch error, loading main data only:", err);
+                        // Load main data even if updates fail
+                        startApp(mainData);
+                        document.getElementById('login-screen').style.display = 'none';
+                        document.getElementById('main-container').style.display = 'flex';
+                    });
 
             } catch (e) {
-                // If auto-login fails, just clear session and let user type
                 if(isAuto) {
                     sessionStorage.removeItem('physics_session_key');
                     passInput.value = '';
@@ -310,7 +319,7 @@
             genBtn.addEventListener('click', () => {
                 const rows = tableBody.querySelectorAll('tr');
                 if(rows.length > 100 && !confirm(`Generate report for ${rows.length} files?`)) return;
-                const pdfBaseUrl = `https://sialaichai.github.io/physicsseab/${PDF_FOLDER}/`;
+                const pdfBaseUrl = `https://sialaichai.github.io/physics9702/${PDF_FOLDER}/`;
                 let html = `<!DOCTYPE html><html><head><title>Report</title><style>body{font-family:sans-serif;margin:20px}embed{width:100%;height:800px;border:1px solid #ccc;margin-bottom:40px}</style></head><body><h1>PDF Report</h1>`;
                 rows.forEach(r => {
                     html += `<div><h3>${r.cells[0].textContent}</h3><embed src='${pdfBaseUrl}${r.cells[1].textContent}/${r.cells[0].textContent}' type='application/pdf' /></div>`;
