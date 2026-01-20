@@ -175,16 +175,14 @@
                 </div>
                 
                 <div class="dropdown-check-container">
-                  <button id="topic-filter-btn" class="filter-button">Topic (<span id="topic-filter-count">0</span>)</button>
-                  <div id="topic-filter-panel" class="dropdown-panel">
-                    <div id="topic-filter-list" class="dropdown-list"></div>
-                    <button id="topic-filter-apply" class="apply-button">Apply</button>
-                  </div>
+                    <button id="topic-filter-btn" class="filter-button">
+                        Topic (<span id="topic-filter-count">0</span>)
+                    </button>
+                    <div id="topic-filter-panel" class="dropdown-panel">
+                        <div id="topic-filter-list" class="dropdown-list"></div>
+                        <button id="topic-filter-apply" class="apply-button">Apply</button>
+                    </div>
                 </div>
-                <label style="display:inline-flex;align-items:center;margin-left:10px;font-size:14px;">
-                  <input type="checkbox" id="include-other-topics" />
-                  <span style="margin-left:4px;">Include “Other Topics”</span>
-                </label>
                 
                 <button id="generate-html-btn">Create HTML</button>
                 <button id="merge-pdf-btn" style="background-color: #007bff; color: white; padding: 8px 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 14px;">Merge PDFs</button>
@@ -521,26 +519,18 @@
             renderTable(fd);
         }
 
-        function applyFilters(data) {
-          let fd = data;
-        
-          if (selectedTopics.size > 0) {
-            const includeOther = document.getElementById('include-other-topics').checked;
-            fd = fd.filter(item => {
-              // Match if selected topic is the main topic
-              if (selectedTopics.has(item.mainTopic)) return true;
-              // If enabled, also match if it appears in otherTopics
-              if (includeOther && item.otherTopics.some(t => selectedTopics.has(t))) return true;
-              return false;
+        function renderTable(data) {
+            tableBody.innerHTML = '';
+            const fragment = document.createDocumentFragment();
+            const displayData = data.length > 500 ? data.slice(0, 500) : data;
+            displayData.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${r.filename}</td><td>${r.year}</td><td>${r.jc}</td><td>${r.paper}</td><td>${r.question}</td><td>${r.mainTopic}</td><td>${r.otherTopics.join(', ')}</td>`;
+                tr.addEventListener('click', () => pdfViewer.src = `${PDF_FOLDER}/${r.year}/${r.filename}`);
+                fragment.appendChild(tr);
             });
-          }
-        
-          if (selectedYears.size > 0) fd = fd.filter(i => selectedYears.has(i.year));
-          if (selectedJCs.size > 0) fd = fd.filter(i => selectedJCs.has(i.jc));
-          if (selectedPapers.size > 0) fd = fd.filter(i => selectedPapers.has(i.paper));
-          if (selectedQuestions.size > 0) fd = fd.filter(i => selectedQuestions.has(i.question));
-        
-          renderTable(fd);
+            tableBody.appendChild(fragment);
+            fileCountDisplay.textContent = data.length > 500 ? `Top 500 of ${data.length} files` : `${data.length} files found`;
         }
 
         const dragger = document.getElementById('dragger');
