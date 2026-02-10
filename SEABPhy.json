@@ -1358,7 +1358,7 @@
   {"filename":"2022_8867H1_P1_q21.pdf","year":"2022","pcode":"8867H1","paper":"P1","question":"q21","mainTopic":"16 Circuits","otherTopics":[]},
   {"filename":"2022_8867H1_P1_q22.pdf","year":"2022","pcode":"8867H1","paper":"P1","question":"q22","mainTopic":"16 Circuits","otherTopics":[]},
   {"filename":"2022_8867H1_P1_q23.pdf","year":"2022","pcode":"8867H1","paper":"P1","question":"q23","mainTopic":"16 Circuits","otherTopics":[]},
-  {"filename":"2022_8867H1_P1_q24.pdf","year":"2022","pcode":"8867H1","paper":"P1","question":"q24","mainTopic":"17  Electromagnetic Forces","otherTopics":["4 Energy and Fields","3 Motion and Forces"]},
+  {"filename":"2022_8867H1_P1_q24.pdf","year":"2022","pcode":"8867H1","paper":"P1","question":"q24","mainTopic":"17 Electromagnetic Forces","otherTopics":["4 Energy and Fields","3 Motion and Forces"]},
   {"filename":"2022_8867H1_P1_q25.pdf","year":"2022","pcode":"8867H1","paper":"P1","question":"q25","mainTopic":"17 Electromagnetic Forces","otherTopics":[]},
   {"filename":"2022_8867H1_P1_q26.pdf","year":"2022","pcode":"8867H1","paper":"P1","question":"q26","mainTopic":"17 Electromagnetic Forces","otherTopics":[]},
   {"filename":"2022_8867H1_P1_q27.pdf","year":"2022","pcode":"8867H1","paper":"P1","question":"q27","mainTopic":"20 Nuclear Physics","otherTopics":[]},
@@ -1492,4 +1492,5 @@
   {"filename":"2024_9749H2_P1_q8.pdf","year":"2024","pcode":"9749H2","paper":"P1","question":"q8","mainTopic":"13 Thermodynamic Systems","otherTopics":[]},
 
   {"filename":"2024_9749H2_P1_q9.pdf","year":"2024","pcode":"9749H2","paper":"P1","question":"q9","mainTopic":"7 Circular Motion","otherTopics":[]}]
+
 
