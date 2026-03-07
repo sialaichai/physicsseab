@@ -6,6 +6,7 @@
     <title>SEAB Physics Viewer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js?v=1.0.2"></script>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <style>
         /* =========================================
            1. MERGED STYLE.CSS
@@ -188,7 +189,7 @@
                 
                 <button id="generate-html-btn">HTML</button>
                 <button id="merge-pdf-btn" style="background-color: #007bff; color: white; padding: 8px 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 14px;">PDFs</button>
-              
+                <button id="download-zip-btn" style="background-color: #ff9800; color: white; padding: 8px 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 14px;">ZIP</button>
                 <span id="file-count-display"></span>
                 <a href="https://sialaichai.github.io/physics9702/" class="nav-link">9702</a>
                 <a href="https://sialaichai.github.io/physicsprelim/" class="nav-link">Prelim</a>
@@ -509,6 +510,64 @@
                     mergeBtn.disabled = false;
                 }
             });
+						        			// --- NEW: DOWNLOAD ZIP FUNCTIONALITY ---
+            const zipBtn = document.getElementById('download-zip-btn');
+            zipBtn.addEventListener('click', async () => {
+                const rows = Array.from(tableBody.querySelectorAll('tr'));
+                
+                // 1. Safety Checks
+                if (rows.length === 0) { alert("No files to zip."); return; }
+                if (rows.length > 100 && !confirm(`Zipping ${rows.length} files might take a while. Continue?`)) return;
+
+                const originalBtnText = zipBtn.textContent;
+                zipBtn.disabled = true;
+
+                try {
+                    // 2. Initialize JSZip
+                    const zip = new JSZip();
+                    const pdfBaseUrl = `https://sialaichai.github.io/physicsseab/${PDF_FOLDER}/`;
+
+                    // 3. Iterate through filtered rows and fetch files
+                    for (let i = 0; i < rows.length; i++) {
+                        const r = rows[i];
+                        const fname = r.cells[0].textContent; // Filename
+                        const year = r.cells[1].textContent;  // Year
+
+                        zipBtn.textContent = `Fetching ${i + 1}/${rows.length}...`;
+
+                        // Fetch the individual PDF
+                        const fileUrl = `${pdfBaseUrl}${year}/${fname}`;
+                        const res = await fetch(fileUrl);
+                        
+                        if (res.ok) {
+                            const blob = await res.blob();
+                            // Add file to the zip folder
+                            zip.file(fname, blob);
+                        } else {
+                            console.error(`Failed to fetch ${fname}`);
+                        }
+                    }
+
+                    // 4. Generate the ZIP file and Download
+                    zipBtn.textContent = "Zipping...";
+                    const content = await zip.generateAsync({ type: "blob" });
+                    
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(content);
+                    link.download = `prelim_papers_${new Date().toISOString().slice(0,10)}.zip`;
+                    link.click();
+                    
+                    // Clean up memory
+                    URL.revokeObjectURL(link.href);
+
+                } catch (err) {
+                    console.error(err);
+                    alert("An error occurred while creating the zip:\n" + err.message);
+                } finally {
+                    zipBtn.textContent = originalBtnText;
+                    zipBtn.disabled = false;
+                }
+            });
         }
 
 		function applyFilters(data) {
@@ -544,7 +603,7 @@
                 fragment.appendChild(tr);
             });
             tableBody.appendChild(fragment);
-            fileCountDisplay.textContent = data.length > 500 ? `Top 500 of ${data.length} files` : `${data.length} files found`;
+            fileCountDisplay.textContent = data.length > 500 ? `Top 500/${data.length}` : `${data.length} files found`;
         }
 
         const dragger = document.getElementById('dragger');
