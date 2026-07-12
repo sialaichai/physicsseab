@@ -704,10 +704,56 @@
                 let decryptedStr = bytes.toString(CryptoJS.enc.Utf8);
                 if (!decryptedStr) throw new Error("Incorrect Password.");
                 
-                // Log first 100 chars of decrypted data for debugging (without exposing full data)
+                // Log first 100 chars of decrypted data for debugging
                 console.log('Decrypted data preview:', decryptedStr.substring(0, 100));
 
-                let bundle = JSON.parse(decryptedStr);
+                // Parse JSON
+                let bundle;
+                try {
+                    bundle = JSON.parse(decryptedStr);
+                } catch (jsonErr) {
+                    console.error('JSON Parse Error:', jsonErr);
+                    console.error('First 200 chars of decrypted data:', decryptedStr.substring(0, 200));
+                    throw new Error('Invalid JSON data. The decrypted content is not valid JSON.');
+                }
+                
+                // Validate the bundle structure
+                if (!bundle.secure_folder) {
+                    console.error('Missing secure_folder in bundle:', bundle);
+                    throw new Error('Missing secure_folder in decrypted data.');
+                }
+                
+                if (!bundle.data) {
+                    console.error('Missing data in bundle:', bundle);
+                    throw new Error('Missing data array in decrypted data.');
+                }
+                
+                // Ensure data is an array
+                if (!Array.isArray(bundle.data)) {
+                    console.error('bundle.data is not an array:', typeof bundle.data);
+                    console.error('bundle.data preview:', JSON.stringify(bundle.data).substring(0, 200));
+                    // Try to convert if it's an object
+                    if (typeof bundle.data === 'object' && bundle.data !== null) {
+                        // If it's an object with numeric keys, convert to array
+                        const dataObj = bundle.data;
+                        if (Object.keys(dataObj).every(k => !isNaN(parseInt(k)))) {
+                            bundle.data = Object.values(dataObj);
+                            console.log('Converted data object to array. Length:', bundle.data.length);
+                        } else {
+                            throw new Error('bundle.data is an object, not an array. Expected an array of question data.');
+                        }
+                    } else {
+                        throw new Error('bundle.data is not an array. Found type: ' + typeof bundle.data);
+                    }
+                }
+                
+                // Validate data array has items
+                if (bundle.data.length === 0) {
+                    console.warn('bundle.data is empty. No data to display.');
+                    showToast('Warning: No data found in the decrypted file.', 'warning', 5000);
+                }
+                
+                console.log(`✅ Successfully decrypted. Found ${bundle.data.length} items.`);
                 
                 sessionStorage.setItem('seab_session_key', pass);
                 PDF_FOLDER = bundle.secure_folder;
@@ -744,6 +790,7 @@
                     });
 
             } catch (e) {
+                console.error('Decryption Error Details:', e);
                 if(isAuto) {
                     sessionStorage.removeItem('seab_session_key');
                     passInput.value = '';
@@ -757,6 +804,29 @@
 
     // 3. APP LOGIC
     function startApp(allData) {
+        // Ensure allData is an array
+        if (!Array.isArray(allData)) {
+            console.error('allData is not an array:', allData);
+            showToast('Error: Data is not in the expected format.', 'error', 5000);
+            // Try to recover if it's an object
+            if (typeof allData === 'object' && allData !== null) {
+                // If it's an object with numeric keys, convert to array
+                if (Object.keys(allData).every(k => !isNaN(parseInt(k)))) {
+                    allData = Object.values(allData);
+                    console.log('Converted data object to array. Length:', allData.length);
+                } else {
+                    // Try to wrap it in an array
+                    allData = [allData];
+                    console.log('Wrapped data in array.');
+                }
+            } else {
+                // If all else fails, set to empty array
+                allData = [];
+                console.warn('Set allData to empty array.');
+            }
+        }
+        
+        // Continue with the app
         let selectedTopics = new Set();
         let selectedYears = new Set();
         let selectedJCs = new Set();
