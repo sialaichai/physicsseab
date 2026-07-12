@@ -283,6 +283,31 @@
         .toast-hiding {
             animation: fadeOut 0.25s ease-in forwards;
         }
+
+                /* Add this to style the test button */
+        .test-btn {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .test-btn:hover { background: #e68900; }
+        #test-output {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -294,6 +319,11 @@
             <p>Clear Browser Cache for latest updates</p>
             <input type="password" id="pass-input" placeholder="Password" onkeypress="handleEnter(event)">
             <button onclick="unlock()">Login</button>
+            <!-- Add Test Button -->
+            <button class="test-btn" onclick="testPayload()">🔍 Test Payload File</button>
+            <div id="test-output"></div>
+            <div id="status-msg" class="status">Initializing...</div>
+            <div id="error-msg" class="error"></div>
             <div id="status-msg" class="status">Initializing...</div>
             <div id="error-msg" class="error"></div>
         </div>
@@ -1141,6 +1171,48 @@
             document.addEventListener('mousemove', (e) => { if(isD) lowerPanel.style.height = `${window.innerHeight - e.clientY - 2.5}px`; });
         }
     }
+        // Add this test function to diagnose the issue
+    function testPayload() {
+        const output = document.getElementById('test-output');
+        output.style.display = 'block';
+        output.innerHTML = 'Testing payloadseab.enc...\n';
+        
+        fetch('payloadseab.enc')
+            .then(res => {
+                output.innerHTML += `Response status: ${res.status} ${res.statusText}\n`;
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.text();
+            })
+            .then(text => {
+                output.innerHTML += `File loaded: ${text.length} characters\n`;
+                output.innerHTML += `First 100 chars: ${text.substring(0, 100)}\n`;
+                output.innerHTML += `Last 50 chars: ${text.substring(text.length - 50)}\n`;
+                
+                // Check for BOM
+                if (text.charCodeAt(0) === 0xFEFF) {
+                    output.innerHTML += '⚠️ BOM detected at start of file!\n';
+                    output.innerHTML += 'Remove BOM and save as UTF-8 without BOM.\n';
+                }
+                
+                // Check for whitespace
+                if (text.trim() !== text) {
+                    output.innerHTML += '⚠️ Extra whitespace detected (spaces or newlines at start/end)\n';
+                }
+                
+                // Check if it looks like valid encrypted data
+                if (text.match(/^[A-Za-z0-9+/=]+$/)) {
+                    output.innerHTML += '✅ File appears to be valid base64 encrypted data\n';
+                } else {
+                    output.innerHTML += '⚠️ File may contain invalid characters\n';
+                }
+                
+                output.innerHTML += '\n✅ File loaded successfully. Try logging in now.';
+            })
+            .catch(err => {
+                output.innerHTML += `❌ Error: ${err.message}\n`;
+                output.innerHTML += 'Make sure payloadseab.enc is in the same directory as this HTML file.';
+            });
+    }    
     </script>
 </body>
 </html>
