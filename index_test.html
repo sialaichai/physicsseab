@@ -602,6 +602,7 @@
                 }
                 if (!res.ok) throw new Error(`Fetch Failed: ${res.status} ${res.statusText}`);
                 const text = await res.text();
+                text = cleanPayload(text);
                 if (!text || text.length === 0) throw new Error("payloadseab.enc is EMPTY.");
                 return text;
             } catch (err) {
@@ -1213,6 +1214,24 @@
                 output.innerHTML += 'Make sure payloadseab.enc is in the same directory as this HTML file.';
             });
     }    
+         // Add this function to clean the payload
+    function cleanPayload(rawText) {
+        // Remove BOM if present
+        if (rawText.charCodeAt(0) === 0xFEFF) {
+            rawText = rawText.slice(1);
+        }
+        
+        // Remove leading/trailing whitespace, newlines, and carriage returns
+        rawText = rawText.trim();
+        
+        // Remove any non-base64 characters (A-Z, a-z, 0-9, +, /, =)
+        // Only do this if the file appears to be base64 encrypted
+        if (/^[A-Za-z0-9+/=\s]+$/.test(rawText.substring(0, 100))) {
+            rawText = rawText.replace(/[^A-Za-z0-9+/=]/g, '');
+        }
+        
+        return rawText;
+    }   
     </script>
 </body>
 </html>
