@@ -2101,5 +2101,641 @@
     "total_marks": 20,
     "weighted_sum": 63,
     "overall_difficulty": 3.15
+  },
+  {
+    "filename": "2017_8866H1_P2_q1.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Express joule in base units", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(b)", "description": "Calculate energy and its uncertainty", "level": 4, "marks": 4, "weighted_score": 16}
+    ],
+    "total_marks": 6,
+    "weighted_sum": 18,
+    "overall_difficulty": 3.00
+  },
+  {
+    "filename": "2017_8866H1_P2_q2.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Calculate speed of X after collision", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)", "description": "Calculate decrease in kinetic energy", "level": 3, "marks": 2, "weighted_score": 6}
+    ],
+    "total_marks": 4,
+    "weighted_sum": 12,
+    "overall_difficulty": 3.00
+  },
+  {
+    "filename": "2017_8866H1_P2_q3.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Estimate total work done from graph", "level": 4, "marks": 4, "weighted_score": 16},
+      {"part": "(b)(i)", "description": "Draw unloading line on graph", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(b)(ii)", "description": "Determine elastic potential energy released", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(c)", "description": "Explain conservation of energy", "level": 2, "marks": 2, "weighted_score": 4}
+    ],
+    "total_marks": 9,
+    "weighted_sum": 30,
+    "overall_difficulty": 3.33
+  },
+  {
+    "filename": "2017_8866H1_P2_q4.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Sketch I–V characteristics for metal and lamp", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)", "description": "Sketch resistance–temperature for thermistor", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(c)(i)", "description": "Calculate resistance at room temperature", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(c)(ii)", "description": "Draw circuit with six lamps on 220 V", "level": 3, "marks": 2, "weighted_score": 6}
+    ],
+    "total_marks": 8,
+    "weighted_sum": 21,
+    "overall_difficulty": 2.63
+  },
+  {
+    "filename": "2017_8866H1_P2_q5.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Explain photoelectric effect evidence for particles", "level": 2, "marks": 3, "weighted_score": 6},
+      {"part": "(b)", "description": "Calculate maximum kinetic energy from graph", "level": 3, "marks": 3, "weighted_score": 9}
+    ],
+    "total_marks": 6,
+    "weighted_sum": 15,
+    "overall_difficulty": 2.50
+  },
+  {
+    "filename": "2017_8866H1_P2_q6.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Explain why hydrogen spectrum is line spectrum", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)(I)", "description": "Calculate frequency and wavelength of emitted light", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(b)(II)", "description": "Suggest colour of light", "level": 1, "marks": 1, "weighted_score": 1},
+      {"part": "(b)(III)", "description": "Suggest type of radiation for transitions to level 1", "level": 1, "marks": 1, "weighted_score": 1}
+    ],
+    "total_marks": 7,
+    "weighted_sum": 15,
+    "overall_difficulty": 2.14
+  },
+  {
+    "filename": "2017_8866H1_P2_q7.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Define velocity", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(a)(ii)", "description": "Define acceleration", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(b)", "description": "Derive s = ut + ½at²", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(c)(i)", "description": "Calculate braking distance", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(c)(ii)", "description": "Plot braking distance vs initial velocity graph", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(c)(iii)", "description": "Suggest algebraic relationship between u and s", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(d)(i)", "description": "Explain safety belts", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(d)(ii)", "description": "Explain anti‑slip tyres", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(d)(iii)", "description": "Explain crumple zones", "level": 2, "marks": 2, "weighted_score": 4}
+    ],
+    "total_marks": 20,
+    "weighted_sum": 45,
+    "overall_difficulty": 2.25
+  },
+  {
+    "filename": "2017_8866H1_P2_q8.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Define frequency of a wave", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(a)(ii)", "description": "Define diffraction", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(a)(iii)", "description": "Define superposition", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(a)(iv)", "description": "Define stationary wave", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(b)", "description": "Describe method to find speed of sound", "level": 2, "marks": 4, "weighted_score": 8},
+      {"part": "(c)(i)", "description": "Calculate speed of sound at 25°C", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)(ii)", "description": "Show unit of c is same as sqrt(kT/M)", "level": 2, "marks": 2, "weighted_score": 4}
+    ],
+    "total_marks": 16,
+    "weighted_sum": 26,
+    "overall_difficulty": 1.63
+  },
+  {
+    "filename": "2017_9749H2_P2_q1.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Calculate force constant of spring", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(i)", "description": "Calculate percentage uncertainty in force constant", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(b)(ii)", "description": "State force constant with uncertainty", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(c)(i)", "description": "Show upthrust is 0.25 N", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)(ii)", "description": "Calculate density of liquid", "level": 3, "marks": 3, "weighted_score": 9}
+    ],
+    "total_marks": 10,
+    "weighted_sum": 32,
+    "overall_difficulty": 3.20
+  },
+  {
+    "filename": "2017_9749H2_P2_q2.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Show orbital period of Charon is 6.36 days", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(a)(ii)1", "description": "Suggest observation from equal periods", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(a)(ii)2", "description": "Suggest observation from equal rotation periods", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(b)", "description": "Calculate gravitational field strength on Pluto", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)(I)", "description": "Derive v = sqrt(2g_p r)", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(c)(II)", "description": "Calculate escape speed from Pluto", "level": 3, "marks": 1, "weighted_score": 3}
+    ],
+    "total_marks": 12,
+    "weighted_sum": 43,
+    "overall_difficulty": 3.58
+  },
+  {
+    "filename": "2017_9749H2_P2_q3.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Describe polarised wave", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)", "description": "Deduce v = fλ", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)(i)", "description": "State and explain interference at P", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(c)(ii)", "description": "Describe resultant amplitude variation", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(c)(iii)", "description": "Suggest change to prevent interference", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(d)", "description": "Calculate intensity ratio at P", "level": 3, "marks": 3, "weighted_score": 9}
+    ],
+    "total_marks": 13,
+    "weighted_sum": 41,
+    "overall_difficulty": 3.15
+  },
+  {
+    "filename": "2017_9749H2_P2_q4.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Draw magnetic field lines around wire", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)", "description": "Calculate magnetic flux density at 19 cm", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(c)(i)", "description": "Calculate horizontal component of Earth's field", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(c)(ii)", "description": "Mark zero resultant field position", "level": 4, "marks": 2, "weighted_score": 8}
+    ],
+    "total_marks": 9,
+    "weighted_sum": 29,
+    "overall_difficulty": 3.22
+  },
+  {
+    "filename": "2017_9749H2_P2_q5.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Calculate resistance of wire", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(a)(ii)", "description": "State and explain change in resistance when stretched", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(a)(iii)", "description": "Calculate resistance of 16‑strand cable", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(b)(i)", "description": "Calculate power dissipated in cable", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(ii)", "description": "Calculate average drift velocity", "level": 3, "marks": 3, "weighted_score": 9}
+    ],
+    "total_marks": 11,
+    "weighted_sum": 35,
+    "overall_difficulty": 3.18
+  },
+  {
+    "filename": "2017_9749H2_P2_q6.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Explain concentric rings from graphite film", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(b)", "description": "State and explain effect of increasing p.d.", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(c)", "description": "Calculate de Broglie wavelength of electrons", "level": 3, "marks": 4, "weighted_score": 12}
+    ],
+    "total_marks": 9,
+    "weighted_sum": 32,
+    "overall_difficulty": 3.56
+  },
+  {
+    "filename": "2017_9749H2_P2_q7.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Calculate horizontal distance when gliding", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(a)(ii)", "description": "Calculate time for gliding and altitude changes", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(a)(iii)", "description": "Deduce drag force from glide ratio", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(i)", "description": "Explain meaning of energy density (kWh kg⁻¹)", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(b)(ii)", "description": "Calculate total energy stored in batteries", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(b)(iii)", "description": "Determine maximum distance from stored energy", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)", "description": "Suggest why energy collected depends on altitude", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(d)", "description": "Explain need to collect more than used during daylight", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(e)1", "description": "Draw two cells in parallel for higher current", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(e)2", "description": "Draw two cells in series for higher e.m.f.", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(f)(i)", "description": "State relationship between power and area", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(f)(ii)", "description": "State what gradient represents", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(f)(iii)", "description": "Calculate intensity of collected sunlight", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(g)(i)", "description": "Complete table for θ = 50°", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(g)(ii)", "description": "Plot point on graph", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(g)(iii)", "description": "Draw best‑fit line on graph", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(g)(iv)", "description": "Determine incident intensity at 36°", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(g)(v)", "description": "Calculate efficiency of solar cells", "level": 3, "marks": 1, "weighted_score": 3}
+    ],
+    "total_marks": 22,
+    "weighted_sum": 59,
+    "overall_difficulty": 2.68
+  },
+  {
+    "filename": "2017_9749H2_P3_q1.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Explain why object reaches terminal velocity", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)", "description": "Derive (g‑a) = kv/m and complete table", "level": 4, "marks": 4, "weighted_score": 16}
+    ],
+    "total_marks": 6,
+    "weighted_sum": 20,
+    "overall_difficulty": 3.33
+  },
+  {
+    "filename": "2017_9749H2_P3_q2.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Suggest if both trolleys can be stationary", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(a)(ii)", "description": "Calculate average force between trolleys", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(I)", "description": "Calculate speed of trolley B after collision", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(II)", "description": "State direction of trolley B", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(c)", "description": "Determine elastic or inelastic", "level": 3, "marks": 2, "weighted_score": 6}
+    ],
+    "total_marks": 9,
+    "weighted_sum": 28,
+    "overall_difficulty": 3.11
+  },
+  {
+    "filename": "2017_9749H2_P3_q3.pdf",
+    "parts": [
+      {"part": "(a)", "description": "State meaning of gravitational field", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(b)(I)", "description": "Show v = sqrt(GM/r) and explain", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(b)(II)", "description": "Calculate ratio M / mass of Sun", "level": 3, "marks": 2, "weighted_score": 6}
+    ],
+    "total_marks": 7,
+    "weighted_sum": 17,
+    "overall_difficulty": 2.43
+  },
+  {
+    "filename": "2017_9749H2_P3_q4.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Complete displacement–time graph for cube", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(i)", "description": "Calculate minimum time to travel between displacements", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(b)(ii)", "description": "Estimate time for cube to cross same displacement", "level": 4, "marks": 1, "weighted_score": 4},
+      {"part": "(c)", "description": "Suggest best position for timing period", "level": 2, "marks": 2, "weighted_score": 4}
+    ],
+    "total_marks": 8,
+    "weighted_sum": 26,
+    "overall_difficulty": 3.25
+  },
+  {
+    "filename": "2017_9749H2_P3_q5.pdf",
+    "parts": [
+      {"part": "(a)(I)", "description": "Calculate width of central fringe", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(a)(II)", "description": "Sketch intensity vs distance graph", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(I)", "description": "Explain Rayleigh criterion", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)(II)", "description": "Calculate angle θ for just resolved", "level": 3, "marks": 2, "weighted_score": 6}
+    ],
+    "total_marks": 9,
+    "weighted_sum": 25,
+    "overall_difficulty": 2.78
+  },
+  {
+    "filename": "2017_9749H2_P3_q6.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Show energy gained is independent of d", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(b)", "description": "Calculate change in speed of α‑particle", "level": 3, "marks": 3, "weighted_score": 9}
+    ],
+    "total_marks": 5,
+    "weighted_sum": 17,
+    "overall_difficulty": 3.40
+  },
+  {
+    "filename": "2017_9749H2_P3_q7.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Explain photoelectric effect with UV vs red", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(b)", "description": "Explain X‑ray production from β absorption", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(c)", "description": "Explain small proportion deflected >90°", "level": 4, "marks": 2, "weighted_score": 8}
+    ],
+    "total_marks": 6,
+    "weighted_sum": 24,
+    "overall_difficulty": 4.00
+  },
+  {
+    "filename": "2017_9749H2_P3_q8.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "State thermal equilibrium by temperature", "level": 1, "marks": 1, "weighted_score": 1},
+      {"part": "(a)(ii)", "description": "State thermal equilibrium by energy transfer", "level": 1, "marks": 1, "weighted_score": 1},
+      {"part": "(b)(i)", "description": "Suggest if ice is in equilibrium with surroundings", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(b)(ii)", "description": "Calculate rate of thermal energy gained from atmosphere", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(c)(i)", "description": "Explain why internal energy proportional to T", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(c)(II)1", "description": "Show mass remains constant during heating", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)(II)2", "description": "Determine specific heat capacity at constant volume", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(c)(III)", "description": "Suggest why cp > cv", "level": 4, "marks": 2, "weighted_score": 8}
+    ],
+    "total_marks": 15,
+    "weighted_sum": 43,
+    "overall_difficulty": 2.87
+  },
+  {
+    "filename": "2017_9749H2_P3_q9.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Explain r.m.s. value by heating effect", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)(I)", "description": "Determine frequency from V = 240 sin 377t", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(II)", "description": "Calculate power dissipation of heater", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(c)(I)1", "description": "State Faraday's law", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(c)(I)2", "description": "Explain alternating e.m.f. from alternating current", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(c)(II)1", "description": "Explain ideal transformer", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(c)(II)2", "description": "Calculate number of secondary turns", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)(III)1", "description": "State two reasons for soft iron core", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(c)(III)2", "description": "Explain lamination reduces energy losses", "level": 2, "marks": 2, "weighted_score": 4}
+    ],
+    "total_marks": 18,
+    "weighted_sum": 45,
+    "overall_difficulty": 2.50
+  },
+  {
+    "filename": "2018_8867H1_P2_q1.pdf",
+    "parts": [
+      {"part": "(a)(I)", "description": "Sketch speed‑time graph for braking", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(a)(II)", "description": "Sketch distance‑time graph for braking", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)", "description": "Explain why varying braking force is more comfortable", "level": 2, "marks": 2, "weighted_score": 4}
+    ],
+    "total_marks": 6,
+    "weighted_sum": 16,
+    "overall_difficulty": 2.67
+  },
+  {
+    "filename": "2018_8867H1_P2_q2.pdf",
+    "parts": [
+      {"part": "(a)", "description": "State Newton's three laws of motion", "level": 1, "marks": 3, "weighted_score": 3},
+      {"part": "(b)(I)", "description": "Calculate velocity after collision", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(II)", "description": "Calculate loss of kinetic energy", "level": 3, "marks": 2, "weighted_score": 6}
+    ],
+    "total_marks": 7,
+    "weighted_sum": 15,
+    "overall_difficulty": 2.14
+  },
+  {
+    "filename": "2018_8867H1_P2_q3.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Calculate resistance of resistor R", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(a)(ii)", "description": "Calculate power supplied to resistor", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(i)", "description": "Calculate time to supply energy", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(b)(II)", "description": "Calculate number of days with pulsed current", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(b)(III)", "description": "Suggest two effects of increasing internal resistance", "level": 2, "marks": 2, "weighted_score": 4}
+    ],
+    "total_marks": 8,
+    "weighted_sum": 22,
+    "overall_difficulty": 2.75
+  },
+  {
+    "filename": "2018_8867H1_P2_q4.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Calculate force on AB and CD and directions", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(i)", "description": "Explain variation of power during rotation", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(b)(ii)", "description": "Explain why forces on BC and AD do not affect motion", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(c)(i)", "description": "Explain why coil stops without split ring", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(c)(ii)", "description": "Explain split ring enables rotation", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(d)", "description": "Suggest how curved pole pieces improve smoothness", "level": 2, "marks": 2, "weighted_score": 4}
+    ],
+    "total_marks": 12,
+    "weighted_sum": 30,
+    "overall_difficulty": 2.50
+  },
+  {
+    "filename": "2018_8867H1_P2_q5.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Write nuclear equation", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(a)(ii)", "description": "Name the other particle", "level": 1, "marks": 1, "weighted_score": 1},
+      {"part": "(b)(i)", "description": "Calculate energy change", "level": 3, "marks": 4, "weighted_score": 12},
+      {"part": "(b)(ii)", "description": "Suggest why not used commercially", "level": 2, "marks": 1, "weighted_score": 2}
+    ],
+    "total_marks": 8,
+    "weighted_sum": 21,
+    "overall_difficulty": 2.63
+  },
+  {
+    "filename": "2018_8867H1_P2_q6.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Calculate weight of balancing load", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(a)(ii)", "description": "Explain missing detail for crane D", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)(i)", "description": "Show load and balancing cannot balance", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(b)(ii)", "description": "Suggest how equilibrium is achieved", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(c)", "description": "Calculate minimum base width w", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(d)(I)", "description": "Estimate output power of motor", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(d)(II)", "description": "Calculate electrical power input", "level": 3, "marks": 2, "weighted_score": 6}
+    ],
+    "total_marks": 16,
+    "weighted_sum": 49,
+    "overall_difficulty": 3.06
+  },
+  {
+    "filename": "2018_8867H1_P2_q7.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Calculate angular velocity of Earth", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(a)(ii)", "description": "Calculate orbital speed of Earth", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(a)(iii)", "description": "Calculate centripetal acceleration", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(b)(i)", "description": "Calculate gravitational force of Sun on Earth", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(II)", "description": "Determine mass of Sun", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)", "description": "Calculate orbital period of Jupiter", "level": 3, "marks": 4, "weighted_score": 12},
+      {"part": "(d)(I)", "description": "Describe geostationary satellite", "level": 2, "marks": 3, "weighted_score": 6},
+      {"part": "(d)(II)", "description": "Give example of use", "level": 1, "marks": 1, "weighted_score": 1}
+    ],
+    "total_marks": 20,
+    "weighted_sum": 55,
+    "overall_difficulty": 2.75
+  },
+  {
+    "filename": "2018_8867H1_P2_q8.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Show resistance of tungsten filament", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(a)(ii)", "description": "Calculate resistance at working temperature", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(i)", "description": "Suggest mistake by student C", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)(ii)", "description": "Describe results of other students", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(c)(I)", "description": "Sketch I–V characteristic of filament lamp", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)(II)", "description": "Describe resistance variation with current", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(c)(III)", "description": "Suggest effect on light emitted when voltage reduced", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(d)(I)", "description": "Advantage of longer, thicker filament", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(d)(II)", "description": "Suggest why extra bright lamps have shorter lifespan", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(d)(III)", "description": "Compare efficiency of LED vs filament", "level": 3, "marks": 2, "weighted_score": 6}
+    ],
+    "total_marks": 20,
+    "weighted_sum": 55,
+    "overall_difficulty": 2.75
+  },
+  {
+    "filename": "2018_9749H2_P2_q1.pdf",
+    "parts": [
+      {"part": "(a)", "description": "State principle of moments", "level": 1, "marks": 1, "weighted_score": 1},
+      {"part": "(b)(i)", "description": "Calculate tensions in supports", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(b)(ii)", "description": "Determine distance of centre of mass", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)", "description": "Explain horizontal component from supports", "level": 2, "marks": 1, "weighted_score": 2}
+    ],
+    "total_marks": 7,
+    "weighted_sum": 18,
+    "overall_difficulty": 2.57
+  },
+  {
+    "filename": "2018_9749H2_P2_q2.pdf",
+    "parts": [
+      {"part": "(a)", "description": "State Hooke's law", "level": 1, "marks": 1, "weighted_score": 1},
+      {"part": "(b)", "description": "Calculate elastic potential energy stored", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)", "description": "Calculate speed at top of loop", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(d)(i)", "description": "Determine minimum speed to complete loop", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(d)(ii)", "description": "State effect of greater mass on v_min", "level": 2, "marks": 1, "weighted_score": 2}
+    ],
+    "total_marks": 10,
+    "weighted_sum": 30,
+    "overall_difficulty": 3.00
+  },
+  {
+    "filename": "2018_9749H2_P2_q3.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Explain meaning of diffraction", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(b)", "description": "Calculate wavelength from single‑slit pattern", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(c)", "description": "Sketch new pattern with narrower slit", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(d)(i)", "description": "State and explain changes with longer wavelength", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(d)(ii)", "description": "Explain white central fringe with white light", "level": 4, "marks": 2, "weighted_score": 8}
+    ],
+    "total_marks": 11,
+    "weighted_sum": 31,
+    "overall_difficulty": 2.82
+  },
+  {
+    "filename": "2018_9749H2_P2_q4.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Explain threshold frequency", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)(i)", "description": "Label threshold frequency on graph", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(b)(ii)", "description": "State significance of gradient", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(b)(iii)", "description": "Draw line for greater work function", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(c)(i)", "description": "Calculate maximum speed of emitted electrons", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(c)(ii)1", "description": "Explain leaf falls with blue but not red", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(c)(ii)2", "description": "Explain leaf will not fall when positively charged", "level": 4, "marks": 2, "weighted_score": 8}
+    ],
+    "total_marks": 12,
+    "weighted_sum": 36,
+    "overall_difficulty": 3.00
+  },
+  {
+    "filename": "2018_9749H2_P2_q5.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Show number density of charge carriers", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)", "description": "Calculate average drift velocity", "level": 3, "marks": 4, "weighted_score": 12},
+      {"part": "(c)", "description": "State and explain change in drift velocity with length", "level": 4, "marks": 3, "weighted_score": 12}
+    ],
+    "total_marks": 9,
+    "weighted_sum": 30,
+    "overall_difficulty": 3.33
+  },
+  {
+    "filename": "2018_9749H2_P2_q6.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Calculate V_out with series resistors", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(a)(ii)", "description": "Calculate new V_out with thermistor in parallel", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(a)(iii)", "description": "State change in V_out with temperature increase", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)", "description": "Calculate output voltage from rotary potentiometer", "level": 3, "marks": 3, "weighted_score": 9}
+    ],
+    "total_marks": 9,
+    "weighted_sum": 25,
+    "overall_difficulty": 2.78
+  },
+  {
+    "filename": "2018_9749H2_P2_q7.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Suggest qualitative relationship between V and f", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(b)(i)", "description": "Plot point on log graph", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(b)(ii)", "description": "Draw line of best fit", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(b)(iii)", "description": "Determine n from graph", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(c)(i)", "description": "Find p.d. for wavelength 520 nm", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(c)(ii)", "description": "Calculate number of photons per minute", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(c)(iii)", "description": "Calculate series resistance", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(d)", "description": "Explain meaning of 730 mAh", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(e)", "description": "Calculate ratio of efficiencies", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(f)(i)", "description": "Explain why LEDs and CFLs are replacing incandescent", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(f)(ii)", "description": "Produce argument for/against LTA decision", "level": 5, "marks": 4, "weighted_score": 20},
+      {"part": "(f)(iii)", "description": "Suggest why incandescent in Canadian traffic lights", "level": 2, "marks": 2, "weighted_score": 4}
+    ],
+    "total_marks": 25,
+    "weighted_sum": 81,
+    "overall_difficulty": 3.24
+  },
+  {
+    "filename": "2018_9749H2_P3_q1.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Sketch distance–time graph for falling ball", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)", "description": "Sketch path of particle with speed 2v", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)", "description": "Sketch path of α‑particle scattered by gold nucleus", "level": 3, "marks": 2, "weighted_score": 6}
+    ],
+    "total_marks": 6,
+    "weighted_sum": 18,
+    "overall_difficulty": 3.00
+  },
+  {
+    "filename": "2018_9749H2_P3_q2.pdf",
+    "parts": [
+      {"part": "(a)", "description": "State meaning of gravitational field", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(b)(i)", "description": "Suggest why Newton's law may be used", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)(ii)", "description": "Calculate gravitational force between Sun and Proxima", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)", "description": "Suggest why force has negligible effect", "level": 2, "marks": 2, "weighted_score": 4}
+    ],
+    "total_marks": 8,
+    "weighted_sum": 16,
+    "overall_difficulty": 2.00
+  },
+  {
+    "filename": "2018_9749H2_P3_q3.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Show electric force on particle", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(a)(ii)", "description": "Calculate acceleration in electric field", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)", "description": "Determine if particle collides with plate", "level": 4, "marks": 3, "weighted_score": 12}
+    ],
+    "total_marks": 7,
+    "weighted_sum": 24,
+    "overall_difficulty": 3.43
+  },
+  {
+    "filename": "2018_9749H2_P3_q4.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Define magnetic flux density", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(a)(ii)", "description": "State magnetic flux linkage", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(b)", "description": "Explain why aluminium ring moves", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(c)", "description": "State and explain effect with insulator ring", "level": 4, "marks": 2, "weighted_score": 8}
+    ],
+    "total_marks": 9,
+    "weighted_sum": 24,
+    "overall_difficulty": 2.67
+  },
+  {
+    "filename": "2018_9749H2_P3_q5.pdf",
+    "parts": [
+      {"part": "(a)", "description": "Explain r.m.s. by heating effect", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)(i)", "description": "Calculate r.m.s. potential difference", "level": 3, "marks": 1, "weighted_score": 3},
+      {"part": "(b)(ii)", "description": "Calculate frequency", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(iii)", "description": "Calculate mean power", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)", "description": "Sketch power vs time graph", "level": 4, "marks": 3, "weighted_score": 12}
+    ],
+    "total_marks": 10,
+    "weighted_sum": 31,
+    "overall_difficulty": 3.10
+  },
+  {
+    "filename": "2018_9749H2_P3_q6.pdf",
+    "parts": [
+      {"part": "(a)", "description": "State meaning of photon", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(b)(i)", "description": "Calculate energy of photon", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(ii)", "description": "Show number of photons per second", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)", "description": "Calculate force normal to surface", "level": 4, "marks": 6, "weighted_score": 24}
+    ],
+    "total_marks": 12,
+    "weighted_sum": 38,
+    "overall_difficulty": 3.17
+  },
+  {
+    "filename": "2018_9749H2_P3_q7.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "State evidence for random decay", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(a)(ii)", "description": "State evidence for spontaneous decay", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(b)(i)", "description": "Show decay constant from graph", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(b)(ii)", "description": "Determine initial mass", "level": 3, "marks": 2, "weighted_score": 6}
+    ],
+    "total_marks": 7,
+    "weighted_sum": 22,
+    "overall_difficulty": 3.14
+  },
+  {
+    "filename": "2018_9749H2_P3_q8.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "Define internal energy", "level": 1, "marks": 1, "weighted_score": 1},
+      {"part": "(a)(ii)", "description": "Define +q and +w in first law", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(b)(i)", "description": "Explain ideal gas", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(b)(ii)1", "description": "Calculate number of molecules", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(b)(ii)2", "description": "Calculate mean kinetic energy", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(b)(ii)3", "description": "Calculate total internal energy", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)(i)", "description": "Calculate increase in internal energy", "level": 3, "marks": 3, "weighted_score": 9},
+      {"part": "(c)(ii)1", "description": "State other constant quantity", "level": 2, "marks": 2, "weighted_score": 4},
+      {"part": "(c)(ii)2", "description": "Determine molar heat capacity", "level": 3, "marks": 2, "weighted_score": 6}
+    ],
+    "total_marks": 19,
+    "weighted_sum": 47,
+    "overall_difficulty": 2.47
+  },
+  {
+    "filename": "2018_9749H2_P3_q9.pdf",
+    "parts": [
+      {"part": "(a)(i)", "description": "State meaning of SHM", "level": 1, "marks": 2, "weighted_score": 2},
+      {"part": "(a)(ii)1", "description": "Explain mass is oscillating from a‑x graph", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(a)(ii)2", "description": "Explain oscillations not SHM", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(b)(i)1", "description": "State position when sand loses contact", "level": 2, "marks": 1, "weighted_score": 2},
+      {"part": "(b)(i)2", "description": "Calculate amplitude for sand", "level": 4, "marks": 3, "weighted_score": 12},
+      {"part": "(b)(ii)", "description": "Suggest effect of larger pebbles", "level": 4, "marks": 2, "weighted_score": 8},
+      {"part": "(c)(i)1", "description": "Calculate total energy of oscillations", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)(i)2", "description": "Calculate displacement where PE=KE", "level": 3, "marks": 2, "weighted_score": 6},
+      {"part": "(c)(ii)", "description": "Sketch energy vs displacement graphs", "level": 4, "marks": 3, "weighted_score": 12}
+    ],
+    "total_marks": 17,
+    "weighted_sum": 52,
+    "overall_difficulty": 3.06
   }
 ]
